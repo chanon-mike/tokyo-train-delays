@@ -1,0 +1,49 @@
+.body {
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ------------------ */
+/* Train Status Table */
+/* ------------------ */
+
+.railways-logo {
+    width: 32px;
+    margin-right: 10px;
+}
+
+tr:nth-of-type(odd) > td,
+td[rowspan] {  
+    background: #F9F9F9;
+}  
+
+
+.table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table thead tr {
+    background-color:#00A1EA;
+    color: #FFF;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.2em; 
+    border-bottom: 1px solid #A2DBFA;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #00A1EA;
+}
