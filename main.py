@@ -41,6 +41,6 @@ def home():
     return render_template("index.html", train_dict=train_dict)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
 
 
