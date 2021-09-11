@@ -14,10 +14,11 @@ data_type = "odpt:TrainInformation?"
 params = {
     "acl:consumerKey": API_KEY
 }
+headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"}
 response = requests.get(ENDPOINT + data_type, params=params)
 print(response)
 data = response.json()
-print(data[0])
+
 
 
 @app.route("/")
