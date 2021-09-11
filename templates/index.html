@@ -12,16 +12,16 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Operators</th>
-                    <th scope="col">Railways</th>
-                    <th scope="col">Train Status</th>
-                    <th scope="col">Time</th>
+                    <th scope="col" class="th-sm">Operators</th>
+                    <th scope="col" class="th-sm">Railways</th>
+                    <th scope="col" class="th-lg">Train Status</th>
+                    <th scope="col" class="th-sm">Time</th>
                 </tr>
             </thead>
             <tbody>
                 {% for operator in (train_dict.keys() | list) %}
                 <tr>
-                    <th rowspan="{{ (train_dict[operator]['railways'] | length) + 1 }}" scope="col">{{operator}}</th>
+                    <th rowspan="{{ (train_dict[operator]['railways'] | length) + 1 }}" scope="row">{{operator}}</th>
                     {% for i in range(train_dict[operator]["railways"] | length) %}
                     <tr>
                         <td><img src="{{ url_for('static', filename='img/logo/' + operator + ' ' + train_dict[operator]['railways'][i] + '.png') }}" class="railways-logo">{{ train_dict[operator]["railways"][i] }}</td>
