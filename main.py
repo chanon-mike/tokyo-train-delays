@@ -15,7 +15,9 @@ params = {
     "acl:consumerKey": API_KEY
 }
 response = requests.get(ENDPOINT + data_type, params=params)
+print(response)
 data = response.json()
+print(data[0])
 
 
 @app.route("/")
