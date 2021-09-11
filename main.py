@@ -16,11 +16,8 @@ data_type = "odpt:TrainInformation?"
 params = {
     "acl:consumerKey": API_KEY
 }
-headers = {'User-Agent': ua.random}
-response = requests.get(ENDPOINT + data_type, params=params, headers=headers)
-print(response)
+response = requests.get(ENDPOINT + data_type, params=params)
 data = response.json()
-
 
 
 @app.route("/")
@@ -42,7 +39,7 @@ def home():
                 }
             }
         )
-
+        
     return render_template("index.html", train_dict=train_dict)
 
 if __name__ == "__main__":
