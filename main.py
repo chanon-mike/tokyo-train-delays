@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
+from fake_useragent import UserAgent
 import requests
 import os
 
@@ -9,12 +10,13 @@ API_KEY = os.getenv("API_KEY")
 ENDPOINT = "https://api-tokyochallenge.odpt.org/api/v4/"
 Bootstrap(app)
 
+ua = UserAgent()
 # Request the data from API
 data_type = "odpt:TrainInformation?"
 params = {
     "acl:consumerKey": API_KEY
 }
-headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"}
+headers = {'User-Agent': ua.random}
 response = requests.get(ENDPOINT + data_type, params=params, headers=headers)
 print(response)
 data = response.json()
