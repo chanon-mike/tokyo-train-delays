@@ -11,16 +11,10 @@
 /* Train Status Table */
 /* ------------------ */
 
-.railways-logo {
-    width: 32px;
-    margin-right: 10px;
-}
-
 tr:nth-of-type(odd) > td,
 td[rowspan] {  
     background: #F9F9F9;
 }  
-
 
 .table {
     border-collapse: collapse;
@@ -42,8 +36,16 @@ td[rowspan] {
 .table th,
 .table td {
     padding: 15px;
+    white-space: break-spaces!important;
 }
 
 .table tbody tr:last-of-type {
     border-bottom: 2px solid #00A1EA;
+}
+
+/* Logo Image */
+
+.railways-logo {
+    width: 32px;
+    margin-right: 10px;
 }
