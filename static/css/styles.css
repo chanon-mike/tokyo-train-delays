@@ -1,10 +1,34 @@
-.body {
+body {
     font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
 }
 
-.container {
+.container{
     max-width: 800px;
     margin: 0 auto;
+    display: grid; 
+}
+
+/* -------- */
+/* General */
+/* ------- */
+
+.big-heading {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.another-page {
+    margin: 10px auto;
+}
+
+.website-icon {
+    width: 64px;
+    margin-right: 10px;
 }
 
 /* ------------------ */
@@ -21,7 +45,7 @@ td[rowspan] {
     margin: 25px 0;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
 }
 
 .table thead tr {
@@ -48,4 +72,13 @@ td[rowspan] {
 .railways-logo {
     width: 32px;
     margin-right: 10px;
+}
+
+/* ----- */
+/* Graph */
+/* ----- */
+
+.passenger-graph {
+    max-width: 800px;
+    max-height: 450px;
 }

@@ -12,9 +12,9 @@ Bootstrap(app)
 
 # ---------- Function ----------
 
-def request_data():
+def request_data(rdf_type):
     # Request the data from API
-    data_type = "odpt:TrainInformation?"
+    data_type = rdf_type + "?"
     params = {
         "acl:consumerKey": API_KEY
     }
@@ -32,9 +32,9 @@ def camel_case_split(str):
 
 @app.route("/")
 def home():
-    data = request_data()
+    data = request_data("odpt:TrainInformation")
     railways = [information['owl:sameAs'].split(':')[1].split(".") for information in data]
-    operators = [railway[0] for railway in railways]
+    operators = list(set([railway[0] for railway in railways]))
     train_dict = {}
 
     # Loop through operators and railways to create dictionary of information
@@ -52,11 +52,42 @@ def home():
                 }
             }
         )
-        
+
     return render_template("index.html", train_dict=train_dict)
 
 
+@app.route("/passenger")
+def passenger():
+    # Make a graph from the Operators
+    data = request_data("odpt:PassengerSurvey")
+    stations = [information["odpt:station"][0].split(':')[1].split(".") for information in data]
+    operators = list(set([information["odpt:operator"].split(":")[-1] for information in data]))
+    passenger_dict = {}
+
+    # Loop through operators and railways to create dictionary of information
+    for i in range(len(operators)):
+        passenger_journeys = [[journey["odpt:passengerJourneys"] for journey in information["odpt:passengerSurveyObject"]][-1] for information in data if information["odpt:operator"].split(":")[-1] == operators[i]]
+        passenger_years = [[journey["odpt:surveyYear"] for journey in information["odpt:passengerSurveyObject"]][-1] for information in data if information["odpt:operator"].split(":")[-1] == operators[i]]
+        # Split the camel case data to normal format
+        operators[i] = camel_case_split(operators[i])
+        passenger_dict.update(
+            {
+                operators[i]: {
+                    "stations": [camel_case_split(station[-1]) for station in stations if camel_case_split(station[0]) == operators[i]],
+                    "passenger_journeys": passenger_journeys,
+                    "passenger_years": passenger_years
+                }
+            }
+        )
+    
+    return render_template("passenger.html", passenger_dict=passenger_dict, operators_list=[camel_case_split(operator) for operator in operators])
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+
+
+
+    
 
 

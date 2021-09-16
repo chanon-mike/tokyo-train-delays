@@ -9,6 +9,9 @@
 
 {% block content %}
 <div class="container">
+    <h1 class="big-heading"><img src="{{ url_for('static', filename='img/website_icon.png' )}}" class="website-icon">
+        Tokyo Train Delay</h1>
+    <a class="btn btn-primary another-page" href="{{ url_for('passenger')}}">Passenger Journeys</a>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -16,7 +19,6 @@
                     <th scope="col">Operators</th>
                     <th scope="col">Railways</th>
                     <th scope="col">Train Status</th>
-                    <!-- <th scope="col">Time</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -26,15 +28,13 @@
                     {% for i in range(train_dict[operator]["railways"] | length) %}
                         {% if (train_dict[operator]["train_status"][i] | length ) > 21 %}
                         <tr class="danger">
-                            <td class="railways"><img src="{{ url_for('static', filename='img/logo/' + operator + ' ' + train_dict[operator]['railways'][i] + '.png') }}" class="railways-logo">{{ train_dict[operator]["railways"][i] }}</td>
+                            <td><img src="{{ url_for('static', filename='img/logo/' + operator + ' ' + train_dict[operator]['railways'][i] + '.png') }}" class="railways-logo">{{ train_dict[operator]["railways"][i] }}</td>
                             <td>{{ train_dict[operator]["train_status"][i] }}</td>
-                            <!-- <td>{{ train_dict[operator]["time"][i] }}</td> -->
                         </tr>
                         {% else %}
                         <tr>
-                            <td class="railways"><img src="{{ url_for('static', filename='img/logo/' + operator + ' ' + train_dict[operator]['railways'][i] + '.png') }}" class="railways-logo">{{ train_dict[operator]["railways"][i] }}</td>
+                            <td><img src="{{ url_for('static', filename='img/logo/' + operator + ' ' + train_dict[operator]['railways'][i] + '.png') }}" class="railways-logo">{{ train_dict[operator]["railways"][i] }}</td>
                             <td>{{ train_dict[operator]["train_status"][i] }}</td>
-                            <!-- <td>{{ train_dict[operator]["time"][i] }}</td> -->
                         </tr>
                         {% endif %}
                     {% endfor %}

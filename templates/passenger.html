@@ -1,0 +1,93 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}Tokyo Train Delay{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">   
+        <h1 class="big-heading"><img src="{{ url_for('static', filename='img/website_icon.png' )}}" class="website-icon">
+            Tokyo Train Delay</h1>
+        <a class="btn btn-primary another-page" href="{{ url_for('home')}}">Train Status</a>
+        {% for operator in operators_list %} 
+        <div class="chart-container"> 
+            <canvas id="{{ operator }}" class="passenger-graph"></canvas>
+        </div>   
+        {% endfor %}
+        
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Operators</th>
+                        <th>Station</th>
+                        <th>People</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for operator in operators_list %}
+                    <tr>
+                        <th rowspan="{{ (passenger_dict[operator]['stations'] | length) + 1 }}" scope="row" class="operators">{{operator}}</th>
+                        {% for i in range(passenger_dict[operator]["stations"] | length) %}
+                        <tr>
+                            <td class="stations">{{ passenger_dict[operator]["stations"][i] }}</td>
+                            <td class="journeys">{{ passenger_dict[operator]["passenger_journeys"][i] }}</td>
+                            <td class="years">{{ passenger_dict[operator]["passenger_years"][i] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> 
+    </div>
+    {% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script>
+        function random_item(items) {
+            return items[Math.floor(Math.random()*items.length)];
+        }
+        
+        var colors = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"];
+        var operatorsList = [{% for dt in operators_list %} "{{dt}}", {% endfor %}];
+        var i = 0;
+        {% for operator in operators_list %} 
+            var ctx = document.getElementById(operatorsList[i]).getContext('2d');
+            var labels = [{% for dt in passenger_dict[operator]['stations'] %} "{{dt}}", {% endfor %}]
+            var data = [{% for dt in passenger_dict[operator]['passenger_journeys'] %} {{dt}}, {% endfor %}]
+
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Numbers of passenger',
+                        data: data,
+                        backgroundColor: random_item(colors),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: 'Estimated passenger of ' + operatorsList[i] + ' line'
+                    }
+                }
+            });
+            i++;
+        {% endfor %}
+    </script>
+    {% endblock %}
+{% endblock %}
+
