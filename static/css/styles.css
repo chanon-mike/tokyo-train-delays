@@ -1,4 +1,4 @@
-body {
+html,body {
     font-family: sans-serif;
     width: 100%;
     height: 100%;
@@ -9,26 +9,27 @@ body {
 
 .container{
     max-width: 800px;
-    margin: 0 auto;
-    display: grid; 
+    margin: 10px auto;
 }
 
-/* -------- */
-/* General */
-/* ------- */
+/* ------------- */
+/* Title Section */
+/* ------------- */
 
 .big-heading {
-    text-align: center;
-    padding-top: 30px;
-}
-
-.another-page {
-    margin: 10px auto;
+    text-align: left;
 }
 
 .website-icon {
     width: 64px;
-    margin-right: 10px;
+    display: block;
+    margin-top: 5px;
+    margin-left: auto;
+}
+
+.another-page-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 /* ------------------ */
@@ -67,18 +68,56 @@ td[rowspan] {
     border-bottom: 2px solid #00A1EA;
 }
 
-/* Logo Image */
-
 .railways-logo {
     width: 32px;
     margin-right: 10px;
+}
+
+.table-responsive {
+    border: 0;
 }
 
 /* ----- */
 /* Graph */
 /* ----- */
 
-.passenger-graph {
+.responsive-chart {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+canvas {
+    width: 100% !important;
     max-width: 800px;
-    max-height: 450px;
+    height: auto !important;
+}
+
+/* ---------- */
+/* Responsive */
+/* ---------- */
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    
+    /* ------------- */
+    /* Title Section */
+    /* ------------- */
+    .big-heading {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .website-icon {
+        width: 25%;
+        display: block;
+        margin-top: 5px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .another-page-button {
+        margin-top: 0;
+        margin-bottom: 35px;
+    }
 }

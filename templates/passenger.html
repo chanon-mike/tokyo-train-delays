@@ -9,42 +9,29 @@
 
 {% block content %}
     <div class="container">   
-        <h1 class="big-heading"><img src="{{ url_for('static', filename='img/website_icon.png' )}}" class="website-icon">
-            Tokyo Train Delay</h1>
-        <a class="btn btn-primary another-page" href="{{ url_for('home')}}">Train Status</a>
-        {% for operator in operators_list %} 
-        <div class="chart-container"> 
-            <canvas id="{{ operator }}" class="passenger-graph"></canvas>
-        </div>   
-        {% endfor %}
+        <div class="row">
+            <span class="col-sm-4"><img src="{{ url_for('static', filename='img/website_icon.png' )}}" class="website-icon"></span>
+            <span class="col-sm-8"><h1 class="big-heading">Tokyo Train Delay</h1></span>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center"><a class="btn btn-primary another-page-button" href="{{ url_for('home')}}">Train Status</a></div>
+        </div>
         
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Operators</th>
-                        <th>Station</th>
-                        <th>People</th>
-                        <th>Year</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for operator in operators_list %}
-                    <tr>
-                        <th rowspan="{{ (passenger_dict[operator]['stations'] | length) + 1 }}" scope="row" class="operators">{{operator}}</th>
-                        {% for i in range(passenger_dict[operator]["stations"] | length) %}
-                        <tr>
-                            <td class="stations">{{ passenger_dict[operator]["stations"][i] }}</td>
-                            <td class="journeys">{{ passenger_dict[operator]["passenger_journeys"][i] }}</td>
-                            <td class="years">{{ passenger_dict[operator]["passenger_years"][i] }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div> 
+        {% for operator in operators_list %} 
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="responsive-chart">
+                            <canvas id="{{ operator }}" class="passenger-graph"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>      
+        {% endfor %}
     </div>
+    
     {% block javascript %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script>
@@ -52,7 +39,11 @@
             return items[Math.floor(Math.random()*items.length)];
         }
         
-        var colors = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"];
+        var colors = [
+            "#90D4F7", "#FFDC89", "#FF89B5", "#898CFF", "#ED6D79", 
+            "#668DE5", "#DA97E0", "#F5A26F", "#5AD0E5", "#71E096",
+            "#FF96E3", "#CFF381", "#67EEBD", "#BB96FF"
+        ]
         var operatorsList = [{% for dt in operators_list %} "{{dt}}", {% endfor %}];
         var i = 0;
         {% for operator in operators_list %} 
@@ -61,21 +52,34 @@
             var data = [{% for dt in passenger_dict[operator]['passenger_journeys'] %} {{dt}}, {% endfor %}]
 
             var myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
                         label: 'Numbers of passenger',
                         data: data,
-                        backgroundColor: random_item(colors),
+                        backgroundColor: colors[i],
                         borderWidth: 1
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true
+                            },
+                            gridLines: {
+                                display:false
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                display: false 
+                            },
+                            gridLines: {
+                                display:false
                             }
                         }]
                     },
