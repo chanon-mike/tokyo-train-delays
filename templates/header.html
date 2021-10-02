@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo Train Delay</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{url_for('train_status', lang_code=lang_code)}}">
+                {% if lang_code == "en" %}Tokyo Train Delay{% elif lang_code == "ja" %}東京遅延情報{% endif %}</a>
+            <div class="navbar-nav ml-auto">
+                {% if lang_code == "en" %}
+                <a class="nav-link active" aria-current="page" href="{{url_for('train_status', lang_code='ja')}}">日本語</a>
+                {% elif lang_code == "ja" %}
+                <a class="nav-link active" aria-current="page" href="{{url_for('train_status', lang_code='en')}}">English</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Title Section -->
+    <div class="container">
+        <div class="row">
+            <span class="col-12"><img src="{{ url_for('static', filename='img/website_icon.png' )}}"
+                    class="website-icon"></span>
+            <span class="col-12">
+                <h1 class="big-heading">{% if lang_code == "en" %}Tokyo Train
+                    Delay{% elif lang_code == "ja" %}東京遅延情報{% endif %}</h1>
+            </span>
+        </div>

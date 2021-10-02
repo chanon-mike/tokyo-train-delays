@@ -1,0 +1,49 @@
+{% include "header.html" %}
+    <div class="row">
+        <div class="col-12 text-center"><a class="btn another-page-button" href="{{ url_for('passenger', lang_code=lang_code)}}">{% if lang_code == "en" %}Passenger Journeys{% elif lang_code == "ja" %}駅別乗降人員{% endif %}</a></div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        {% if lang_code == "en" %}
+                        <th scope="col" class="col-lg-2">Operators</th>
+                        <th scope="col" class="col-lg-3">Railways</th>
+                        <th scope="col" class="col-lg-7">Train Status</th>
+                        {% elif lang_code == "ja" %}
+                        <th scope="col" class="col-lg-2 col-md-3 col-sm-1">事業者</th>
+                        <th scope="col" class="col-lg-3 col-md-3 col-sm-3">路線</th>
+                        <th scope="col" class="col-lg-7 col-md-6 col-sm-8">運行情報</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for operator in (train_dict.keys() | list) %}
+                    <tr>
+                        <th rowspan="{{ (train_dict[operator][lang_code]['railways'] | length) + 1 }}" scope="row">{{ train_dict[operator][lang_code]["operator"] }}</th>
+                        {% for i in range((train_dict[operator][lang_code]["railways"] | list) | length) %}
+                            {% if (train_dict[operator][lang_code]["train_status"][i] | length ) > 25 %}
+                            <tr class="danger">
+                                <td><img src="{{ url_for('static', filename='img/logo/' + operator + ' ' + train_dict[operator]['en']['railways'][i] + '.png') }}" class="railways-logo">{{ train_dict[operator][lang_code]["railways"][i] }}</td>
+                                <td>{{ train_dict[operator][lang_code]["train_status"][i] }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td><img src="{{ url_for('static', filename='img/logo/' + operator + ' ' + train_dict[operator]['en']['railways'][i] + '.png') }}" class="railways-logo">{{ train_dict[operator][lang_code]["railways"][i] }}</td>
+                                <td>{{ train_dict[operator][lang_code]["train_status"][i] }}</td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+
+

@@ -1,97 +1,91 @@
-{% extends 'bootstrap/base.html' %}
-{% block title %}Tokyo Train Delay{% endblock %}
-
-{% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-{% endblock %}
-
-{% block content %}
-    <div class="container">   
-        <div class="row">
-            <span class="col-sm-4"><img src="{{ url_for('static', filename='img/website_icon.png' )}}" class="website-icon"></span>
-            <span class="col-sm-8"><h1 class="big-heading">Tokyo Train Delay</h1></span>
-        </div>
-        <div class="row">
-            <div class="col-12 text-center"><a class="btn btn-primary another-page-button" href="{{ url_for('home')}}">Train Status</a></div>
-        </div>
-        
-        {% for operator in operators_list %} 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="responsive-chart">
-                            <canvas id="{{ operator }}" class="passenger-graph"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         </div>      
-        {% endfor %}
+{% include "header.html" %}
+    <div class="row">
+        <div class="col-12 text-center"><a class="btn another-page-button" href="{{ url_for('train_status', lang_code=lang_code)}}">{% if lang_code == "en" %}Train Status{% elif lang_code == "ja" %}運行情報{% endif %}</a></div>
     </div>
     
-    {% block javascript %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-    <script>
-        function random_item(items) {
-            return items[Math.floor(Math.random()*items.length)];
-        }
-        
-        var colors = [
-            "#90D4F7", "#FFDC89", "#FF89B5", "#898CFF", "#ED6D79", 
-            "#668DE5", "#DA97E0", "#F5A26F", "#5AD0E5", "#71E096",
-            "#FF96E3", "#CFF381", "#67EEBD", "#BB96FF"
-        ]
-        var operatorsList = [{% for dt in operators_list %} "{{dt}}", {% endfor %}];
-        var i = 0;
-        {% for operator in operators_list %} 
-            var ctx = document.getElementById(operatorsList[i]).getContext('2d');
-            var labels = [{% for dt in passenger_dict[operator]['stations'] %} "{{dt}}", {% endfor %}]
-            var data = [{% for dt in passenger_dict[operator]['passenger_journeys'] %} {{dt}}, {% endfor %}]
+    <!-- Graph Section -->
+    {% for operator in operators_list_en %} 
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="responsive-chart">
+                    <canvas id="{{ operator }}" class="passenger-graph"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>      
+    {% endfor %}
+</div>
 
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Numbers of passenger',
-                        data: data,
-                        backgroundColor: colors[i],
-                        borderWidth: 1
+<!-- Graph Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script>
+    function random_item(items) {
+        return items[Math.floor(Math.random()*items.length)];
+    }
+    
+    var colors = [
+        "#90D4F7", "#FFDC89", "#FF89B5", "#898CFF", "#ED6D79", 
+        "#668DE5", "#DA97E0", "#F5A26F", "#5AD0E5", "#71E096",
+        "#FF96E3", "#CFF381", "#67EEBD", "#BB96FF"
+    ]
+    var operatorsListEn = [{% for dt in operators_list_en %} "{{dt}}", {% endfor %}];
+    var operatorsListJa = [{% for dt in operators_list_ja %} "{{dt}}", {% endfor %}];
+    var i = 0;
+    {% for operator in operators_list_en %} 
+        var ctx = document.getElementById(operatorsListEn[i]).getContext('2d');
+        var labels = [{% for dt in passenger_dict[operator]['stations'] %} "{{dt}}", {% endfor %}]
+        var data = [{% for dt in passenger_dict[operator]['passenger_journeys'] %} {{dt}}, {% endfor %}]
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    {% if lang_code == "en" %}
+                    label: 'Numbers of passenger',
+                    {% elif lang_code == "ja" %}
+                    label: '乗降客数',
+                    {% endif %}
+                    data: data,
+                    backgroundColor: colors[i],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display:false
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: false 
+                        },
+                        gridLines: {
+                            display:false
+                        }
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            },
-                            gridLines: {
-                                display:false
-                            }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                display: false 
-                            },
-                            gridLines: {
-                                display:false
-                            }
-                        }]
-                    },
-                    title: {
-                        display: true,
-                        text: 'Estimated passenger of ' + operatorsList[i] + ' line'
-                    }
+                title: {
+                    display: true,
+                    {% if lang_code == "en" %}
+                    text: 'Estimated passenger of ' + operatorsListEn[i] + ' line'
+                    {% elif lang_code == "ja" %}
+                    text: operatorsListJa[i] + 'の乗降客数'
+                    {% endif %}
                 }
-            });
-            i++;
-        {% endfor %}
-    </script>
-    {% endblock %}
-{% endblock %}
+            }
+        });
+        i++;
+    {% endfor %}
+</script>
+{% include "footer.html" %}
+
 

@@ -7,31 +7,38 @@ html,body {
     overflow-x: hidden; 
 }
 
-.container{
-    max-width: 800px;
+.container {
+    max-width: 1000px;
     margin: 10px auto;
 }
+
 
 /* ------------- */
 /* Title Section */
 /* ------------- */
 
 .big-heading {
-    text-align: left;
+    text-align: center;
+    padding-bottom: 10px;
 }
 
 .website-icon {
-    width: 64px;
+    width: 15%;
     display: block;
-    margin-top: 5px;
-    margin-left: auto;
+    margin: 15px auto;
 }
 
 .another-page-button {
+    background-color:#00A1EA;
+    color: #FFF;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 30px;
 }
 
+.bg-blue {
+    background-color: #115D98;
+    color: #FFF;
+}
 /* ------------------ */
 /* Train Status Table */
 /* ------------------ */
@@ -43,7 +50,7 @@ td[rowspan] {
 
 .table {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 0;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
@@ -75,6 +82,7 @@ td[rowspan] {
 
 .table-responsive {
     border: 0;
+    padding: 0;
 }
 
 /* ----- */
@@ -89,8 +97,28 @@ td[rowspan] {
 
 canvas {
     width: 100% !important;
-    max-width: 800px;
+    max-width: 1000px;
     height: auto !important;
+}
+
+/* ------ */
+/* Footer */
+/* ------ */
+
+.footer {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.footer a {
+    color: #A2DBFA;
+}
+
+.footer-logo {
+    width: 32px;
+    margin-right: 5px;
 }
 
 /* ---------- */
@@ -103,21 +131,31 @@ canvas {
     /* ------------- */
     /* Title Section */
     /* ------------- */
-    .big-heading {
-        margin-top: 0;
-        text-align: center;
-    }
 
     .website-icon {
         width: 25%;
-        display: block;
-        margin-top: 5px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     .another-page-button {
         margin-top: 0;
         margin-bottom: 35px;
+    }
+
+    /* ------------------ */
+    /* Train Status Table */
+    /* ------------------ */
+
+    .railways-logo {
+        width: 32px;
+        margin: 0 10px 10px 0;
+        display: block;
+    }
+
+    /* ----- */
+    /* Graph */
+    /* ----- */
+
+    .responsive-chart {
+        height: 200px !important;
     }
 }
