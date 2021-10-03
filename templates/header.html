@@ -24,9 +24,9 @@
                 {% if lang_code == "en" %}Tokyo Train Delay{% elif lang_code == "ja" %}東京遅延情報{% endif %}</a>
             <div class="navbar-nav ml-auto">
                 {% if lang_code == "en" %}
-                <a class="nav-link active" aria-current="page" href="{{url_for('train_status', lang_code='ja')}}">日本語</a>
+                <a class="nav-link active" aria-current="page" href="{{url_for(request.endpoint, lang_code='ja')}}">日本語</a>
                 {% elif lang_code == "ja" %}
-                <a class="nav-link active" aria-current="page" href="{{url_for('train_status', lang_code='en')}}">English</a>
+                <a class="nav-link active" aria-current="page" href="{{url_for(request.endpoint, lang_code='en')}}">English</a>
                 {% endif %}
             </div>
         </div>
