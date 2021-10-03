@@ -106,16 +106,19 @@ td[rowspan] {
     border-bottom: 2px solid #00A1EA;
 }
 
-.railways-logo {
-    width: 32px;
-    margin-right: 10px;
-}
-
 .table-responsive {
     border: 0;
     padding: 0;
 }
 
+.train-delay {
+    background-color: #F8D7DA !important;
+}
+
+.railways-logo {
+    width: 32px;
+    margin-right: 10px;
+}
 /* ----- */
 /* Graph */
 /* ----- */
