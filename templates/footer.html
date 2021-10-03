@@ -1,11 +1,18 @@
     <!-- Footer -->
-    <div class="footer bg-blue">
-        <a href="https://github.com/chanon-mike/tokyo-train-delays"><img class="footer-logo"
-                src="{{url_for('static', filename='img/github_icon.png')}}"></a>Copyright &copy; <script>
-            document.write(new Date().getFullYear())
-        </script> <a href="https://github.com/chanon-mike">Chanon Limpipolpaibul</a>
+    <div class="footer">
+        {% if lang_code == "en" %}
+        <a href="https://twitter.com/tokyotraindelay"><i class="fab fa-twitter fa-2x footer-logo"></i></a>
+        {% elif lang_code == "ja" %}
+        <a href="https://twitter.com/chienjyouhou"><i class="fab fa-twitter fa-2x footer-logo"></i></a>
+        {% endif %}
+        <a href="https://github.com/chanon-mike/tokyo-train-delays"><i class="fab fa-github fa-2x"></i></a>
+        <p>
+            Copyright &copy; <script>document.write(new Date().getFullYear())</script> 
+            <a href="https://github.com/chanon-mike" id="myname">Chanon Limpipolpaibul</a>
+        </p>  
     </div>
 
-    </body>
-
-    </html>
+    <!-- Custom scripts for this template -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

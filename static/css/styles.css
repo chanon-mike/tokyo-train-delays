@@ -1,10 +1,11 @@
-html,body {
+body {
     font-family: sans-serif;
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -12,6 +13,40 @@ html,body {
     margin: 10px auto;
 }
 
+/* ------- */
+/* General */
+/* ------- */
+
+#scrollToTopBtn {
+    /* button styling */
+    background-color: #212529; 
+    color: #FFF;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px; 
+    padding: 0 9px;
+
+    /* placing at the bottom */
+    position: fixed;
+    bottom: 50px;
+    right: 15px;
+    z-index: 100;
+    opacity: 0;
+    /* transform: translateY(100px); */
+    transition: all 0.5s ease; 
+}
+
+.showBtn {
+    opacity: 0.5 !important;
+    /* transform: translateY(0); */
+}
+
+.bg-blue {
+    background-color: #115D98;
+    color: #FFF;
+}
 
 /* ------------- */
 /* Title Section */
@@ -29,24 +64,20 @@ html,body {
 }
 
 .another-page-button {
-    background-color:#00A1EA;
+    background-color: #00A1EA;
     color: #FFF;
     margin-top: 5px;
     margin-bottom: 30px;
 }
 
-.bg-blue {
-    background-color: #115D98;
-    color: #FFF;
-}
 /* ------------------ */
 /* Train Status Table */
 /* ------------------ */
 
-tr:nth-of-type(odd) > td,
-td[rowspan] {  
+tr:nth-of-type(odd)>td,
+td[rowspan] {
     background: #F9F9F9;
-}  
+}
 
 .table {
     border-collapse: collapse;
@@ -57,18 +88,18 @@ td[rowspan] {
 }
 
 .table thead tr {
-    background-color:#00A1EA;
+    background-color: #00A1EA;
     color: #FFF;
     text-align: left;
     font-weight: bold;
-    font-size: 1.2em; 
+    font-size: 1.2em;
     border-bottom: 1px solid #A2DBFA;
 }
 
 .table th,
 .table td {
     padding: 15px;
-    white-space: break-spaces!important;
+    white-space: break-spaces !important;
 }
 
 .table tbody tr:last-of-type {
@@ -106,19 +137,20 @@ canvas {
 /* ------ */
 
 .footer {
+    font-size: 0.8rem;
     text-align: center;
-    width: 100%;
     padding: 10px;
     margin-top: 20px;
 }
 
+.footer p,
 .footer a {
-    color: #A2DBFA;
+    color: #495057;
+    text-decoration: none;
 }
 
 .footer-logo {
-    width: 32px;
-    margin-right: 5px;
+    margin: 5px 15px;
 }
 
 /* ---------- */
@@ -127,7 +159,16 @@ canvas {
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-    
+
+    #scrollToTopBtn {
+        font-size: 1.5em !important;
+        width: 32px;
+        height: 32px;
+        padding: 4px 9px;
+        bottom: 30px;
+        right: 10px;
+    }
+
     /* ------------- */
     /* Title Section */
     /* ------------- */
