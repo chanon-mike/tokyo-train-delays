@@ -5,11 +5,12 @@ import os
 
 # App Settings
 app = Flask(__name__)
-API_KEY = os.getenv("API_KEY")
+IBM_API_KEY = os.getenv("IBM_API_KEY")
+OPENDATA_API_KEY = os.getenv("OPENDATA_API_KEY")
 Bootstrap(app)
 
 # Get the data from DataManager class
-data_manager = DataManager(API_KEY)
+data_manager = DataManager(opendata_api_key=OPENDATA_API_KEY, ibm_api_key=IBM_API_KEY)
 
 
 @app.route("/")
@@ -46,8 +47,6 @@ def passenger(lang_code):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-        
 
 
     

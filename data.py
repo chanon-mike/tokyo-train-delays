@@ -1,11 +1,17 @@
+from ibm_watson import LanguageTranslatorV3
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 import requests
+import json
 import re
 
-ENDPOINT = "https://api-tokyochallenge.odpt.org/api/v4/"
+OPENDATA_ENDPOINT = "https://api-tokyochallenge.odpt.org/api/v4/"
+IBM_ENDPOINT = "https://api.au-syd.language-translator.watson.cloud.ibm.com/instances/96e3285a-e20c-40e4-8562-8fc9a454209d"
 
 class DataManager:
-    def __init__(self, api_key):
-        self.api_key = api_key
+    def __init__(self, opendata_api_key, ibm_api_key):
+        self.opendata_api_key = opendata_api_key
+        self.ibm_api_key = ibm_api_key
+
         self.railway_data = self.request_data("odpt:Railway")
         self.operator_data = self.request_data("odpt:Operator")
         self.train = self.train_status()
@@ -20,9 +26,9 @@ class DataManager:
         # Request the data from API
         data_type = rdf_type + "?"
         params = {
-            "acl:consumerKey": self.api_key
+            "acl:consumerKey": self.opendata_api_key
         }
-        response = requests.get(ENDPOINT + data_type, params=params)
+        response = requests.get(OPENDATA_ENDPOINT + data_type, params=params)
         print(response)
         data = response.json()
 
@@ -42,6 +48,29 @@ class DataManager:
             operator_name = info["owl:sameAs"].split(":")[-1]
             if operator == operator_name:
                 return info["odpt:operatorTitle"][language]
+
+    # ----- Watson IBM translating -----
+
+    def translate(self, text):
+        if ("平常" in text) or (text == "現在、１５分以上の遅延はありません。"):
+            return "Service on schedule"
+
+        model_id = 'ja-en'
+
+        # Prepare the Authenticator
+        authenticator = IAMAuthenticator(self.ibm_api_key)
+        language_translator = LanguageTranslatorV3(
+            version='2018-05-01',
+            authenticator=authenticator
+        )
+        language_translator.set_service_url(IBM_ENDPOINT)
+
+        # Translate
+        translation = language_translator.translate(
+            text=text,
+            model_id=model_id).get_result()
+            
+        return json.loads(json.dumps(translation))["translations"][0]["translation"]
 
     # ----- Data use in website -----
 
@@ -68,7 +97,7 @@ class DataManager:
                         "en": {
                             "operator": self.camel_case_split(operators[i]),
                             "railways": [self.camel_case_split(railway[-1]) for railway in railways if railway[0] == operators[i]],
-                            "train_status": train_status,
+                            "train_status": [self.translate(status) for status in train_status],
                             "time": time
                         }
                     } 
@@ -99,3 +128,4 @@ class DataManager:
             )
         
         return passenger_dict
+
