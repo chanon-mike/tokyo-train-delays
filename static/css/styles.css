@@ -8,6 +8,11 @@ body {
     scroll-behavior: smooth;
 }
 
+a {
+    color: #00A1EA;
+    text-decoration: none;
+}
+
 .container {
     max-width: 1000px;
     margin: 10px auto;
@@ -143,7 +148,7 @@ canvas {
     font-size: 0.8rem;
     text-align: center;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 5%;
 }
 
 .footer p,
@@ -156,6 +161,25 @@ canvas {
     margin: 5px 15px;
 }
 
+/* ------*/
+/* About */
+/* ----- */
+
+.about {
+    font-size: 0.9em;
+}
+
+.about-heading {
+    /* font-size: 1.5em; */
+    padding-top: 2em;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #ccc;
+}
+
+.red-text {
+    color: #FF0000;
+}
 /* ---------- */
 /* Responsive */
 /* ---------- */

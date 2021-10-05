@@ -1,0 +1,72 @@
+{% include "header.html" %}
+<div class="about">
+    {% if lang_code == "en" %}
+    <section class="about-us">
+        <h4 class="about-heading">About Tokyo Train Delay</h4>
+        <p>Tokyo Train Delay is a web application displayed information about train delay in Tokyo.
+            <a href="{{ url_for('train_status', lang_code=lang_code)}}">Operation Status</a> are represented along
+            with railways and operators in a table. Delay information is displayed in <span class="red-text">red
+                background</span>.
+        </p>
+        <p>In the <a href="{{ url_for('passenger', lang_code=lang_code)}}">Passenger Journeys</a> page, with the goal of
+            encouraging people to avoid crowds,
+            this application display information about the number of people getting on and off the train with
+            simple design graph.</p>
+        <p>Tokyo Train Delay is build with responsive in mind and support both English and Japanese languages.</p>
+    </section>
+
+    <section class="how-to-use">
+        <h4 class="about-heading">How to use</h4>
+        <p></p>
+    </section>
+
+    <section class="contact">
+        <h4 class="about-heading">Contact</h4>
+        <p>The source of the public transportation data in this app is the <a
+                href="https://tokyochallenge.odpt.org/en/">Open Data Challenge for Public Transportation in Tokyo</a>.
+        </p>
+        <p>This application data are based on the data provided by the public transportation operators.
+            And the operation status displayed by this application are provided by <a
+                href="https://www.ibm.com/cloud/watson-language-translator">
+                IBM Watson Language Translator</a>.
+            The accuracy and integrity of the data are not guaranteed. Please do not contact the public transportation
+            operators directly regarding the content of the app. </p>
+        <p>If you want to contact us, please contact us via below email.</p>
+        <a href="mailto:tokyochienjyouhou@gmail.com">tokyochienjyouhou@gmail.com</a>
+    </section>
+
+    {% elif lang_code == "ja" %}
+    <section class="about-us">
+        <h4 class="about-heading">「東京遅延情報」に関して</h4>
+        <p>本アプリケーションの画面では各路線の<a href="{{ url_for('train_status', lang_code=lang_code)}}">運行状況</a>が表示されています。</p>
+        <p>遅延情報に該当する内容が<span class="red-text">赤枠</span>で表示され、どの線が運行に遅延状況を担っているか、把握できるため、すぐに遅延情報を得られるのが、
+            このアプリ最大のメリットとなっております。
+            レスポンシブデザインであり、スマートフォンからでも理解しやすいです。</p>
+        <p>別ページの駅別乗降人数を表示しています。コロナウイルスの蜜回避の対策が行われていることから、
+            Tokyo_Open_Dataが所持するデータをもとに乗降人数をグラフで可視化することにより、
+            自身の利用している各駅の電車の乗降人数、利用者の規模の理解を少しでも深められるよう作成いたしました。
+        </p>
+        <p>このアプリ画面によって、少しでも、利用状況が過多になっている路線・駅を全体的に均一の利用者、
+            三蜜回避(人の密集)、他の線の利用を促す事を目的に作成いたしました。
+            グラフ表示かつシンプルなデザインのため電車の乗降人数、利用者の規模の理解がしやすい点が強みです。
+        </p>
+    </section>
+
+    <section class="how-to-use">
+        <h4 class="about-heading">使用方法</h4>
+        <p></p>
+    </section>
+
+    <section class="contact">
+        <h4 class="about-heading">お問い合わせ</h4>
+        <p>本アプリケーションが利用する公共交通データは、<a href="https://tokyochallenge.odpt.org/en/">東京公共交通オープンデータチャレンジ</a>
+            において提供されるものです。
+            また、本アプリケーションの英語の運行情報の表示内容は<a href="https://www.ibm.com/cloud/watson-language-translator">
+                IBM Watson Language Translator</a>のデータにより提供されています。</p>
+        <p>必ずしも正確・完全なものとは限りません。本アプリケーションの表示内容について、公共交通事業者への直接の問合せは行わないでください。</p>
+        <p>本アプリケーションに関するお問い合わせは、以下のメールアドレスにお願いします。</p>
+        <a href="mailto:tokyochienjyouhou@gmail.com">tokyochienjyouhou@gmail.com</a>
+    </section>
+    {% endif %}
+</div>
+{% include "footer.html" %}

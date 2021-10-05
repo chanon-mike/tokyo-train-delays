@@ -45,6 +45,10 @@ def passenger(lang_code):
     return render_template("passenger.html", passenger_dict=passenger_dict, operators_list_en=operators_list_en, operators_list_ja=operators_list_ja, lang_code=lang_code)
 
 
+@app.route('/about/<lang_code>')
+def about(lang_code):
+    return render_template("about.html", lang_code=lang_code)
+
 if __name__ == "__main__":
     app.run(debug=True)
 

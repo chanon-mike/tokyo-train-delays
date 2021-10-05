@@ -8,9 +8,8 @@
     <title>Tokyo Train Delay</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-zrnmn8R8KkWl12rAZFt4yKjxplaDaT7/EUkKm7AovijfrQItFWR7O/JJn4DAa/gx" crossorigin="anonymous">
     
@@ -27,13 +26,20 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue" id="top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{url_for('train_status', lang_code=lang_code)}}">
-                {% if lang_code == "en" %}Tokyo Train Delay{% elif lang_code == "ja" %}東京遅延情報{% endif %}</a>
-            <div class="navbar-nav ml-auto">
-                {% if lang_code == "en" %}
-                <a class="nav-link active" aria-current="page" href="{{url_for(request.endpoint, lang_code='ja')}}">日本語</a>
-                {% elif lang_code == "ja" %}
-                <a class="nav-link active" aria-current="page" href="{{url_for(request.endpoint, lang_code='en')}}">English</a>
-                {% endif %}
+                {% if lang_code == "en" %}Tokyo Train Delay{% elif lang_code == "ja" %}東京遅延情報{% endif %}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="{{url_for('about', lang_code=lang_code)}}">About</a>
+                    {% if lang_code == "en" %}
+                    <a class="nav-link active" aria-current="page" href="{{url_for(request.endpoint, lang_code='ja')}}">日本語</a>
+                    {% elif lang_code == "ja" %}
+                    <a class="nav-link active" aria-current="page" href="{{url_for(request.endpoint, lang_code='en')}}">English</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>

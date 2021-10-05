@@ -10,7 +10,7 @@ function scrollToTop() {
 function handleScroll() {
     // Do something on scroll
     var scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    if (document.documentElement.scrollTop / scrollTotal > 0.4) {
+    if (document.documentElement.scrollTop / scrollTotal > 0.2) {
         // Show button
         scrollToTopBtn.classList.add("showBtn");
     } else {
