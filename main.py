@@ -49,6 +49,11 @@ def passenger(lang_code):
 def about(lang_code):
     return render_template("about.html", lang_code=lang_code)
 
+
+@app.route('/help/<lang_code>')
+def help(lang_code):
+    return render_template("help.html", lang_code=lang_code)
+
 if __name__ == "__main__":
     app.run(debug=True)
 

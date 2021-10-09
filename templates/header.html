@@ -33,6 +33,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="{{url_for('help', lang_code=lang_code)}}">Help</a>
                     <a class="nav-link" href="{{url_for('about', lang_code=lang_code)}}">About</a>
                     {% if lang_code == "en" %}
                     <a class="nav-link active" aria-current="page" href="{{url_for(request.endpoint, lang_code='ja')}}">日本語</a>

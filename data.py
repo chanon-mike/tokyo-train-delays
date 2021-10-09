@@ -14,6 +14,7 @@ class DataManager:
 
         self.railway_data = self.request_data("odpt:Railway")
         self.operator_data = self.request_data("odpt:Operator")
+
         self.train = self.train_status()
         self.passenger = self.passenger_surveys()
 
@@ -35,11 +36,12 @@ class DataManager:
         return data
 
     def get_railway(self, railway, language):
+        # e.g. Keisei, Seibu, Keikyu exception
+        if railway == "Seibu" or railway == "Keisei" or railway == "Keikyu":
+            station_exception = {"Seibu":"西武鉄道各線", "Keisei":"京成線", "Keikyu":"京急線"}
+            return station_exception[railway]
         for info in self.railway_data:
-            railway_name = info["owl:sameAs"].split(":")[-1]
-            # e.g. Keisei, Seibu, Keikyu exception
-            if "." not in railway:
-                railway_name = railway_name.split(".")[0]
+            railway_name = info["owl:sameAs"].split(":")[-1].split(".")[-1]
             if railway == railway_name:
                 return info["odpt:railwayTitle"][language]
 
@@ -90,14 +92,15 @@ class DataManager:
                     {
                         "ja": {
                             "operator": self.get_operator(operators[i], "ja"),
-                            "railways": [self.get_railway(".".join(railway), "ja") for railway in railways if railway[0] == operators[i]],
+                            "railways": [self.get_railway(railway[-1], "ja") for railway in railways if railway[0] == operators[i]],
                             "train_status": train_status,
                             "time": time
                         },
                         "en": {
                             "operator": self.camel_case_split(operators[i]),
                             "railways": [self.camel_case_split(railway[-1]) for railway in railways if railway[0] == operators[i]],
-                            "train_status": [self.translate(status) for status in train_status],
+                            # "train_status": [self.translate(status) for status in train_status],
+                            "train_status": train_status,
                             "time": time
                         }
                     } 
@@ -112,7 +115,6 @@ class DataManager:
         operators = list(set([information["odpt:operator"].split(":")[-1] for information in data]))
         passenger_dict = {}
 
-        # Loop through operators and railways to create dictionary of information
         for i in range(len(operators)):
             passenger_journeys = [[journey["odpt:passengerJourneys"] for journey in information["odpt:passengerSurveyObject"]][-1] for information in data if information["odpt:operator"].split(":")[-1] == operators[i]]
             passenger_years = [[journey["odpt:surveyYear"] for journey in information["odpt:passengerSurveyObject"]][-1] for information in data if information["odpt:operator"].split(":")[-1] == operators[i]]

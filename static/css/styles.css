@@ -177,9 +177,28 @@ canvas {
     border-bottom: 1px solid #ccc;
 }
 
-.red-text {
-    color: #FF0000;
+.how-to-use {
+    line-height: 1.75;
 }
+
+.how-to-use .column {
+    flex: 33.33%;
+    padding: 5px;
+}
+
+/* Create three equal columns that sits next to each other */
+.how-to-use .row {
+    display: flex;
+}
+
+.how-to-img {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+
 /* ---------- */
 /* Responsive */
 /* ---------- */
@@ -225,5 +244,19 @@ canvas {
 
     .responsive-chart {
         height: 200px !important;
+    }
+
+    /* ------*/
+    /* About */
+    /* ----- */
+
+    .how-to-use .row {
+        display: block;
+        margin:  20px;
+    }
+
+    .how-to-use .column {
+        padding: 5px;
+        margin: 20px 0;
     }
 }

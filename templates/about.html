@@ -5,19 +5,13 @@
         <h4 class="about-heading">About Tokyo Train Delay</h4>
         <p>Tokyo Train Delay is a web application displayed information about train delay in Tokyo.
             <a href="{{ url_for('train_status', lang_code=lang_code)}}">Operation Status</a> are represented along
-            with railways and operators in a table. Delay information is displayed in <span class="red-text">red
-                background</span>.
+            with railways and operators in a table. Delay information is displayed in red background.
         </p>
         <p>In the <a href="{{ url_for('passenger', lang_code=lang_code)}}">Passenger Journeys</a> page, with the goal of
             encouraging people to avoid crowds,
             this application display information about the number of people getting on and off the train with
             simple design graph.</p>
         <p>Tokyo Train Delay is build with responsive in mind and support both English and Japanese languages.</p>
-    </section>
-
-    <section class="how-to-use">
-        <h4 class="about-heading">How to use</h4>
-        <p></p>
     </section>
 
     <section class="contact">
@@ -35,11 +29,12 @@
         <a href="mailto:tokyochienjyouhou@gmail.com">tokyochienjyouhou@gmail.com</a>
     </section>
 
+
     {% elif lang_code == "ja" %}
     <section class="about-us">
         <h4 class="about-heading">「東京遅延情報」に関して</h4>
         <p>本アプリケーションの画面では各路線の<a href="{{ url_for('train_status', lang_code=lang_code)}}">運行状況</a>が表示されています。</p>
-        <p>遅延情報に該当する内容が<span class="red-text">赤枠</span>で表示され、どの線が運行に遅延状況を担っているか、把握できるため、すぐに遅延情報を得られるのが、
+        <p>遅延情報に該当する内容が赤枠で表示され、どの線が運行に遅延状況を担っているか、把握できるため、すぐに遅延情報を得られるのが、
             このアプリ最大のメリットとなっております。
             レスポンシブデザインであり、スマートフォンからでも理解しやすいです。</p>
         <p>別ページの駅別乗降人数を表示しています。コロナウイルスの蜜回避の対策が行われていることから、
@@ -50,11 +45,6 @@
             三蜜回避(人の密集)、他の線の利用を促す事を目的に作成いたしました。
             グラフ表示かつシンプルなデザインのため電車の乗降人数、利用者の規模の理解がしやすい点が強みです。
         </p>
-    </section>
-
-    <section class="how-to-use">
-        <h4 class="about-heading">使用方法</h4>
-        <p></p>
     </section>
 
     <section class="contact">

@@ -1,0 +1,71 @@
+{% include "header.html" %}
+<div class="about">
+    {% if lang_code == "en" %}
+    <section class="how-to-use">
+        <h4 class="about-heading">How to use</h4>
+        <ul>
+            <li>Please follow the Tokyo Train Delay Twitter account(<a href="https://twitter.com/tokyotraindelay">@tokyotraindelay</a>)
+                to receive delay information on a timely basis.</li>
+            <li>Please look at our <a href="{{ url_for('train_status', lang_code=lang_code)}}">Train Status</a> page 
+                to learn more about the status of train operations.
+                <ul>
+                    <li>Operation Status are displayed along with railways and operators in a table.</li>
+                    <li>Delay information is displayed in red background.</li>
+                </ul>
+            </li>
+            <li>Please see the <a href="{{ url_for('passenger', lang_code=lang_code)}}">Passenger Journeys</a> page 
+                for the most recent year's number of people boarding and disembarking from the train.
+                <ul>
+                    <li>The data will be plotted in a line graph.</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="column">
+                <img src="{{ url_for('static', filename='img/screenshots/screenshot-twitter-en1.png') }}" class="how-to-img">
+            </div>
+            <div class="column">
+                <img src="{{ url_for('static', filename='img/screenshots/screenshot-web-en1.png') }}" class="how-to-img">
+            </div>
+            <div class="column">
+                <img src="{{ url_for('static', filename='img/screenshots/screenshot-web-en3.png') }}" class="how-to-img">
+            </div>
+        </div>
+    </section>
+
+
+    {% elif lang_code == "ja" %}
+    <section class="how-to-use">
+        <h4 class="about-heading">使用方法</h4>
+        <ul>
+            <li>Twitterアカウント(<a href="https://twitter.com/chienjyouhou">@chienjyouhou</a>)をフォローして頂いて、
+                tweet内容から入手したい、路線の情報を入手してもらうことを想定しています。</li>
+            <li>また、詳しく各路線状況を閲覧したい場合、<a href="{{ url_for('train_status', lang_code=lang_code)}}">Webアプリ</a>
+                を利用していただけると幸いです。
+                <ul>
+                    <li>運行情報のページでは運行状況が表示されています。</li>
+                    <li>遅延情報に該当する内容が赤枠で表示されています。</li>
+                </ul>
+            </li>
+            <li>コロナ禍の人口集中を回避するため、<a href="{{ url_for('passenger', lang_code=lang_code)}}">乗降者人数</a>
+                も確認できるため是非ご利用下さい。
+                <ul>
+                    <li>事業者ごとに、それぞれの駅の乗降客人数がグラフに表示されています。</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="column">
+                <img src="{{ url_for('static', filename='img/screenshots/screenshot-twitter-ja1.png') }}" class="how-to-img">
+            </div>
+            <div class="column">
+                <img src="{{ url_for('static', filename='img/screenshots/screenshot-web-ja1.png') }}" class="how-to-img">
+            </div>
+            <div class="column">
+                <img src="{{ url_for('static', filename='img/screenshots/screenshot-web-ja3.png') }}" class="how-to-img">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% include "footer.html" %}
