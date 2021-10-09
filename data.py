@@ -99,8 +99,7 @@ class DataManager:
                         "en": {
                             "operator": self.camel_case_split(operators[i]),
                             "railways": [self.camel_case_split(railway[-1]) for railway in railways if railway[0] == operators[i]],
-                            # "train_status": [self.translate(status) for status in train_status],
-                            "train_status": train_status,
+                            "train_status": [self.translate(status) for status in train_status],
                             "time": time
                         }
                     } 
