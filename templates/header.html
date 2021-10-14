@@ -33,6 +33,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav ms-auto">
+                    {% if lang_code == "en" %}
+                    <a class="nav-link" aria-current="page" href="https://twitter.com/tokyotraindelay">Twitter</a>
+                    {% elif lang_code == "ja" %}
+                    <a class="nav-link" aria-current="page" href="https://twitter.com/chienjyouhou">Twitter</a>
+                    {% endif %}
                     <a class="nav-link" href="{{url_for('help', lang_code=lang_code)}}">Help</a>
                     <a class="nav-link" href="{{url_for('about', lang_code=lang_code)}}">About</a>
                     {% if lang_code == "en" %}
