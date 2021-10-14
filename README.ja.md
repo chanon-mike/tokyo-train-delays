@@ -33,5 +33,7 @@ Twitterアカウント[(@chienjyouhou)](https://twitter.com/chienjyouhou)をフ�
 - Twitterボット: Kohei Horiguchi(堀口紘平)
 - アイコン: Shuei Oshikubo(押久保秀英)
 
+[TwitterボットのGithubのレポ](https://github.com/Kohei554/opendata0925)
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
