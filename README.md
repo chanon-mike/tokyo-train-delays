@@ -31,7 +31,7 @@ This application data are based on the data provided by the public transportatio
 - Twitter bot: Kohei Horiguchi(堀口紘平)
 - Icon: Shuei Oshikubo(押久保秀英)
 
-[Twitter bot Github repositories](https://github.com/Kohei554/opendata0925)
+[Twitter bot Github repository](https://github.com/Kohei554/opendata0925)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
