@@ -1,3 +1,7 @@
+## Current Status
+
+⚠️The API from the open data challenge cannot currently be used. As a result, the server is being shut down.⚠️
+
 # Tokyo Train Delay
 [Japanese README](./README.ja.md)
 
