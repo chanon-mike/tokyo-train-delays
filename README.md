@@ -15,6 +15,12 @@ Please follow the Tokyo Train Delay Twitter account[(@tokyotraindelay)](https://
 
 ![web-pc-ja](./static/img/screenshots/screenshot-web-en4.png)
 
+## Presentation Slide
+
+https://drive.google.com/file/d/1rDAJv_f4vfR9QSpTJS_72NsBAEK2xq8K/view?usp=sharing
+![image](https://github.com/chanon-mike/tokyo-train-delays/assets/27944646/163e9b30-bea2-4a71-ae75-adbd7a4a6590)
+
+
 ## Train Status Page
 This webpage will show the information about the delay information of the train in Tokyo. Operation Status are represented along with railways and operators in a table. Delay information is displayed in red background.
 
